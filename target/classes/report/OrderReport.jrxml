@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrderReport" pageWidth="640" pageHeight="842" columnWidth="600" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d445851-4e80-410c-ac8d-abf8061d7af2">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="orderId" uuid="a3ac7fa5-56ab-4cea-8324-052b149e1301">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="230" y="0" width="100" height="30" uuid="c915ad02-445c-4a60-a27e-8193dd7fb6f0"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[領収書]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<line>
+				<reportElement x="450" y="33" width="131" height="1" uuid="6b93d7bf-dcb8-4328-858d-25ff51c203af"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="368" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="599" height="368" uuid="51ed8483-0807-449f-9f4e-11d7a4ea16d2"/>
+				<componentElement>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="430" width="69" height="327" uuid="2d672ec0-1cf9-4aa0-bad9-fc43dfce9b7c">
+						<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="OrderId"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="orderId" uuid="facf6630-b24e-4a58-b9c9-ea0abe6240b2">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+						</datasetRun>
+						<jr:listContents height="327" width="69"/>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="150" y="0" width="240" height="327" uuid="a68fb505-a129-416c-b6df-e307f27831ae">
+						<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="ProductName"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="orderId" uuid="ceac6032-7291-4659-9961-df838f877297">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+						</datasetRun>
+						<jr:listContents height="327" width="240"/>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="391" y="0" width="49" height="327" uuid="b07f324f-0b30-4ca4-a2c9-77ab0cb96c0d">
+						<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="Price"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="orderId" uuid="47ed1698-e3b5-41f0-a78e-2f75c14f313b">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+						</datasetRun>
+						<jr:listContents height="327" width="49"/>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="490" y="0" width="43" height="327" uuid="1f35b129-421d-4b28-9140-082902751d0a">
+						<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="Amount"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="orderId" uuid="2f9e5d78-a877-4b5f-8a32-1807ab486b83">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+						</datasetRun>
+						<jr:listContents height="327" width="43"/>
+					</jr:list>
+				</componentElement>
+				<componentElement>
+					<reportElement x="441" y="0" width="49" height="327" uuid="53f1e620-d938-415d-98d4-29eebe54eead">
+						<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="Quantity"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="orderId" uuid="f63ec4c4-4bff-4d3b-b716-00aacf197845">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+						</datasetRun>
+						<jr:listContents height="327" width="49"/>
+					</jr:list>
+				</componentElement>
+				<staticText>
+					<reportElement x="40" y="-75" width="490" height="40" uuid="2fea78fd-861e-4282-9b11-b63cef8ea5b5"/>
+					<text><![CDATA[下記のとおり注文を納品しましたので、よってここに証明します]]></text>
+				</staticText>
+				<componentElement>
+					<reportElement x="70" y="0" width="80" height="327" uuid="3b8be8f2-3114-4441-a721-da9091da6cf7">
+						<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="ProductId"/>
+					</reportElement>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+						<datasetRun subDataset="orderId" uuid="6108d1c7-675f-47a7-b374-8fdbaf1e51e3">
+							<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+						</datasetRun>
+						<jr:listContents height="327" width="80"/>
+					</jr:list>
+				</componentElement>
+				<textField pattern="MMMMM dd, yyyy">
+					<reportElement x="481" y="-89" width="100" height="14" uuid="e3cce86f-b906-41fe-b84f-3394963f50eb"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="549" y="25" width="50" height="50" uuid="37d9fe46-9fc4-46c9-a2c7-97175069a7c7"/>
+					<imageExpression><![CDATA[""]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="11" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="51" splitType="Stretch"/>
+	</summary>
+</jasperReport>
