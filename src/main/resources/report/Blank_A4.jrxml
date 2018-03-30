@@ -7,8 +7,8 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="Product_name" class="java.lang.String"/>
-	<field name="Price" class="java.lang.Integer"/>
+	<field name="product_name" class="java.lang.String"/>
+	<field name="price" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -44,9 +44,6 @@
 			</staticText>
 		</band>
 	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
 	<columnHeader>
 		<band height="30" splitType="Stretch">
 			<staticText>
@@ -76,7 +73,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="40" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="278" height="30" uuid="e6c72428-c998-4fc3-97a2-d233745c5df6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7f31360c-e6ab-47b0-a4a7-2e517c82e8ca"/>
@@ -87,9 +84,9 @@
 				<textElement>
 					<font fontName="IPAexg"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Product_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
 			</textField>
-			<textField pattern="#,# # 0. # #;-#,# # 0. # #">
+			<textField pattern="#,##0.##;-#,## 0.##">
 				<reportElement x="278" y="0" width="277" height="30" uuid="eb905f5e-200a-4b1e-8027-0e3c95476776">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4994fb9-f158-44bf-9a82-01f35742495c"/>
 				</reportElement>
@@ -100,17 +97,26 @@
 					<font fontName="IPAexg"/>
 					<paragraph rightIndent="2"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Price}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="70">
+			<textField>
+				<reportElement x="472" y="35" width="48" height="14" uuid="60f789b6-8632-492b-a6b8-1daf957a80d9"/>
+				<textElement textAlignment="Right">
+					<font fontName="IPAexg"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} + "/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="520" y="35" width="34" height="14" uuid="a26088d6-0466-4753-b5ba-8932673a1ecf"/>
+				<textElement>
+					<font fontName="IPAexg"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
