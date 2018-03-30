@@ -8,23 +8,41 @@ import tsugaruinfo.entity.Order;
 public class OrderDataAccessObject {
 
 	public List<Order> findByALL(){
-		Order o1 = new Order("order1", 1, "幕の内弁当", 10, 100, 1000);
-		Order o2 = new Order("order2", 2, "のり弁当", 20, 101, 2020);
-		Order o3 = new Order("order3", 3, "上・幕の内弁当", 30, 102, 3060);
-		Order o4 = new Order("order4", 4, "特上・幕の内弁当", 40, 103, 4120);
-		Order o5 = new Order("order5", 5, "から揚げ弁当", 50, 104, 5200);
-		Order o6 = new Order("order6", 6, "チャーハン弁当", 60, 105, 6300);
-		Order o7 = new Order("order7", 7, "中華弁当", 70, 106, 7420);
-		Order o8 = new Order("order8", 8, "ホイコーロー弁当", 80, 107, 8560);
-		Order o9 = new Order("order9", 9, "チンジャオロース弁当", 90, 108, 9720);
-		Order o10 = new Order("order10", 10, "中華丼弁当", 100, 109, 10900);
-		Order o11 = new Order("order11", 11, "パスタ弁当", 110, 210, 23100);
-		Order o12 = new Order("order12", 12, "バジルパスタ弁当", 120, 220, 24400);
-		Order o13 = new Order("order13", 13, "ミネストローネ弁当", 130, 230, 29900);
-		Order o14 = new Order("order14", 14, "カルボナーラ弁当", 140, 240, 33600);
-		Order o15 = new Order("order15", 15, "ミートソース弁当", 150, 250, 32500);
-		Order o16 = new Order("order16", 16, "たらこパスタ弁当", 160, 260, 41600);
-		Order o17 = new Order("order17", 17, "ピザ弁当", 170, 270, 45900);
+		Order o1 = new Order("幕の内弁当", 10, 100, 1000, "お昼用の弁当");
+		Order o2 = new Order("上・幕の内弁当", 20, 200, 2000, "お昼用の弁当");
+		Order o3 = new Order("特上・幕の内弁当", 30, 300, 3000, "お昼用の弁当");
+		Order o4 = new Order("ハンバーグ弁当", 40, 400, 4000, "お昼用の弁当");
+		Order o5 = new Order("から揚げ弁当", 50, 500, 5000, "お昼用の弁当");
+		Order o6 = new Order("焼肉弁当", 60, 600, 6000, "お昼用の弁当");
+		Order o7 = new Order("中華丼", 70, 700, 7000, "お昼用の注文");
+		Order o8 = new Order("ホイコーロー", 80, 800, 8000, "お昼用の注文");
+		Order o9 = new Order("チンジャオロースー", 90, 900, 9000, "お昼用の注文");
+		Order o10 = new Order("チャーハンラーメン", 100, 1000, 10000, "お昼用の注文");
+		Order o11 = new Order("エビチリ弁当", 110, 1100, 11000, "お昼用の弁当");
+		Order o12 = new Order("広島風お好み焼き", 120, 1200, 12000, "注文");
+		Order o13 = new Order("タンメン", 130, 1300, 13000, "お昼用の注文");
+		Order o14 = new Order("カルボナーラ", 140, 1400, 14000, "お昼用の弁当");
+		Order o15 = new Order("ナポリタン", 150, 1500, 15000, "お昼用の弁当");
+		Order o16 = new Order("バジルソース", 160, 1600, 16000, "お昼用の弁当");
+		Order o17 = new Order("ラザニア", 170, 1700, 17000, "お昼用の弁当");
+		
+		Order o18 = new Order("幕の内弁当", 10, 100, 1000, "お昼用の弁当");
+		Order o19 = new Order("上・幕の内弁当", 20, 200, 2000, "お昼用の弁当");
+		Order o20 = new Order("特上・幕の内弁当", 30, 300, 3000, "お昼用の弁当");
+		Order o21 = new Order("ハンバーグ弁当", 40, 400, 4000, "お昼用の弁当");
+		Order o22 = new Order("から揚げ弁当", 50, 500, 5000, "お昼用の弁当");
+		Order o23 = new Order("焼肉弁当", 60, 600, 6000, "お昼用の弁当");
+		Order o24 = new Order("中華丼", 70, 700, 7000, "お昼用の注文");
+		Order o25 = new Order("ホイコーロー", 80, 800, 8000, "お昼用の注文");
+		Order o26 = new Order("チンジャオロースー", 90, 900, 9000, "お昼用の注文");
+		Order o27 = new Order("チャーハンラーメン", 100, 1000, 10000, "お昼用の注文");
+		Order o28 = new Order("エビチリ弁当", 110, 1100, 11000, "お昼用の弁当");
+		Order o29 = new Order("広島風お好み焼き", 120, 1200, 12000, "注文");
+		Order o30 = new Order("タンメン", 130, 1300, 13000, "お昼用の注文");
+		Order o31 = new Order("カルボナーラ", 140, 1400, 14000, "お昼用の弁当");
+		Order o32 = new Order("ナポリタン", 150, 1500, 15000, "お昼用の弁当");
+		Order o33 = new Order("バジルソース", 160, 1600, 16000, "お昼用の弁当");
+		Order o34 = new Order("ラザニア", 170, 1700, 17000, "お昼用の弁当");
 		
 		List<Order> result = new ArrayList<Order>();
 		
@@ -45,6 +63,24 @@ public class OrderDataAccessObject {
 		result.add(o15);
 		result.add(o16);
 		result.add(o17);		
+		
+		result.add(o18);
+		result.add(o19);
+		result.add(o20);
+		result.add(o21);
+		result.add(o22);
+		result.add(o23);
+		result.add(o24);
+		result.add(o25);
+		result.add(o26);
+		result.add(o27);
+		result.add(o28);
+		result.add(o29);
+		result.add(o30);
+		result.add(o31);
+		result.add(o32);
+		result.add(o33);
+		result.add(o34);		
 		
 		return result;
 	}

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +22,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import tsugaruinfo.dao.OrderDataAccessObject;
+import tsugaruinfo.dao.SampleProductDao;
 import tsugaruinfo.entity.Order;
 import tsugaruinfo.entity.Product;
+import tsugaruinfo.entity.SampleProductModel;
 import tsugaruinfo.model.ProductModel;
 import tsugaruinfo.report.*;
 
@@ -52,61 +55,135 @@ public class ProductController {
 	
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String order(ModelMap modelMap, HttpServletResponse response) {
-		//Mapに入れなおす
-		List<Map<String, ?>> listOrders = new ArrayList<Map<String, ?>>();
+		
 		OrderDataAccessObject a = new OrderDataAccessObject();
+		//データ作成
+		HashMap<String, Object> params = new HashMap<String, Object>();
 		
-		for(Order o: a.findByALL()) {
-			Map<String, Object> m = new HashMap<String, Object>();
-			
-			m.put("Orderid", o.getOrderId());
-			m.put("Productname", o.getProductId());
-			m.put("Productprice", o.getProductName());
-			m.put("Price", o.getPrice());
-			m.put("Quantity", o.getQuantity());
-			m.put("Amount", o.getAmount());
-			
-			m.put("OrderIdTitle", o.getOrderId());
-			m.put("ProductNameTitle", o.getProductId());
-			m.put("ProductPriceTitle", o.getProductName());
-			m.put("PriceTitle", o.getPrice());
-			m.put("QuantityTitle", o.getQuantity());
-			m.put("AmountTitle", o.getAmount());
-			Date date = new Date();
-			m.put("date", date.getTime());
-			m.put("client", "田中様");
-			
-			listOrders.add(m);
-		}
+		//ヘッダーデータ作成
+		params.put("sum_amount", (double)sumAmount(a.findByALL()));
+		params.put("com_name", "鈴木証券株式会社");
+		params.put("now", Calendar.getInstance().getTime().toString());
 		
-		byte[] output  = OrderReporting(listOrders, response);
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.MONTH, 4);
+		cal.set(Calendar.DATE, 31);
+		
+		params.put("to_date", cal.getTime().toString());
+		
+		//データを検索し帳票を出力
+		byte[] output  = OrderReporting(params, a.findByALL());
 		
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment; filename=" + "Order.pdf");
         response.setContentLength(output.length);
-		
+		//データをダウンロード
         OutputSreamWrite(response, output);
 		
-		return "showMessage";
+		return null;
 	}
 	
-	private byte[] OrderReporting(List<Map<String, ?>> data, HttpServletResponse response) {
-		List<Map<String, ?>> dataSource = data;
-		JRDataSource jrDataSource = new JRBeanCollectionDataSource(dataSource);
+	@RequestMapping(value = "/sample", method = RequestMethod.GET)
+	public String sample( HttpServletResponse response) {
 		
+		/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼　データ作成部　▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼**/
+		//ヘッダーデータ作成
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("Client_name", "山本証券");
+		params.put("Date_today", "平成30年5月1日");
 		
+		//フィールドデータ作成
+		SampleProductDao dao = new SampleProductDao();
+		List<SampleProductModel> fields = dao.findByAll();
+		
+		/**▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲　データ作成部　▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲**/
+		/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼　帳票出力部　▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼**/
+		//データを検索し帳票を出力
+		byte[] output  = OrderReporting2(params, fields);
+		/**▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲　データ作成部　▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲**/
+		
+		/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼　データ作成データダウンロード部 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼**/
+		response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment; filename=" + "sample.pdf");
+        response.setContentLength(output.length);
+		
+        OutputStream os = null;
+        try {
+            os = response.getOutputStream();
+            os.write(output);
+            os.flush();
+            
+            os.close();
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+		/**▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲　データ作成部　▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲**/
+        
+        
+		return null;
+	}
+	
+	/**
+	 * ジャスパーレポートコンパイル。バイナリファイルを返却する。
+	 * @param data
+	 * @param response
+	 * @return
+	 */
+	private byte[] OrderReporting(HashMap<String, Object> param, List<Order> data) {
 		InputStream input;
 		try {
+			//帳票ファイルを取得
 			input = new FileInputStream(resource.getResource("classpath:report/OrderReport.jrxml").getFile());
-			
+			//リストをフィールドのデータソースに
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data);
+			//帳票をコンパイル
 			JasperReport jasperReport = JasperCompileManager.compileReport(input);
 			
 			JasperPrint jasperPrint;
-			
-			jasperPrint = JasperFillManager.fillReport(jasperReport, null, jrDataSource);
-
+			//パラメーターとフィールドデータを注入
+			jasperPrint = JasperFillManager.fillReport(jasperReport, param, dataSource);
+			//帳票をByte形式で出力
 			return 	JasperExportManager.exportReportToPdf(jasperPrint);
-	        
+			
+		} catch (FileNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (JRException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+
+	}
+	
+	/**
+	 * ジャスパーレポートコンパイル。バイナリファイルを返却する。
+	 * @param data
+	 * @param response
+	 * @return
+	 */
+	private byte[] OrderReporting2(HashMap<String, Object> param, List<SampleProductModel> data) {
+		InputStream input;
+		try {
+			//帳票ファイルを取得
+			input = new FileInputStream(resource.getResource("classpath:report/Blank_A4.jrxml").getFile());
+			//リストをフィールドのデータソースに
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data);
+			//帳票をコンパイル
+			JasperReport jasperReport = JasperCompileManager.compileReport(input);
+			
+			JasperPrint jasperPrint;
+			//パラメーターとフィールドデータを注入
+			jasperPrint = JasperFillManager.fillReport(jasperReport, param, dataSource);
+			//帳票をByte形式で出力
+			return 	JasperExportManager.exportReportToPdf(jasperPrint);
+			
 		} catch (FileNotFoundException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -135,8 +212,24 @@ public class ProductController {
             os = response.getOutputStream();
             os.write(output);
             os.flush();
+            
+            os.close();
         } catch (IOException e) {
             e.getStackTrace();
         }
+	}
+	
+	/**
+	 * 金額の合計を返す。
+	 * @param response
+	 * @param fileContent
+	 */
+	public int sumAmount(List<Order> list) {
+        int sum_amount = 0;
+        for(Order o : list) {
+        	sum_amount = sum_amount + o.getAmount();
+        }
+        
+        return sum_amount;
 	}
 }
